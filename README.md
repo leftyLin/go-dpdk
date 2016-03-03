@@ -1,8 +1,8 @@
 # go-dpdk
-[Intel DPDK](https://dpdk.org) for golang
+[Intel DPDK](http://dpdk.org) for [cgo](https://github.com/golang/go/wiki/cgo)
 
 # Tutorial
-+ Download and build dpdk with `CONFIG_RTE_COMBINE_LIBS=y`
++ [Download and build](http://dpdk.org/doc/guides/linux_gsg/build_dpdk.html) DPDK with `CONFIG_RTE_COMBINE_LIBS=y`
 + Run `export RTE_SDK=/path/to/dpdk`
 + Run `export RTE_TARGET=some_target` e.g. `RTE_TARGET=x86_64-native-linuxapp-gcc`
 + Run `export CGO_CFLAGS="-I{$RTE_SDK}/${RTE_TARGET}/include"`
