@@ -3,6 +3,12 @@ package dpdk
 /*
 #include <rte_config.h>
 #include <rte_mbuf.h>
+#include <rte_ether.h>
+#include <rte_ip.h>
+
+struct ipv4_hdr *go_mbuf_to_ipv4(struct rte_mbuf *mb) {
+    return rte_pktmbuf_mtod_offset(mb, struct ipv4_hdr *, sizeof(struct ether_hdr));
+}
 */
 import "C"
 
@@ -94,4 +100,9 @@ func RtePktMbufPoolCreate(name string, n, cache_size, priv_size,
 	return (*RteMemPool)(C.rte_pktmbuf_pool_create(C.CString(name),
 		C.unsigned(n), C.unsigned(cache_size), C.uint16_t(priv_size),
 		C.uint16_t(data_room_size), C.int(socket_id)))
+}
+
+func (mb *RteMbuf) IPv4() *IPv4Hdr {
+	cMb := (*C.struct_rte_mbuf)(mb)
+	return (*IPv4Hdr)(C.go_mbuf_to_ipv4(cMb))
 }
